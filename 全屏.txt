@@ -1,0 +1,44 @@
+// ==UserScript==
+// @name         全屏插件
+// @version      1.0.0
+// @description  手机浏览器全屏控制
+// @author       liuming
+// @match        https://warh5.rivergame.net/*
+// ==/UserScript==
+(function() {
+    'use strict';
+    // 创建悬浮按钮元素
+    const fullscreenBtn = document.createElement('button');
+    fullscreenBtn.innerText = '全屏';
+
+    // 设置悬浮按钮样式
+    fullscreenBtn.style.position = 'fixed';
+    fullscreenBtn.style.right = '20px';
+    fullscreenBtn.style.bottom = '20px';
+    fullscreenBtn.style.zIndex = '999';
+    fullscreenBtn.style.padding = '10px';
+    fullscreenBtn.style.backgroundColor = '#333';
+    fullscreenBtn.style.color = '#fff';
+    fullscreenBtn.style.border = 'none';
+    fullscreenBtn.style.borderRadius = '50%';
+    fullscreenBtn.style.cursor = 'pointer';
+    fullscreenBtn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.3)';
+
+    // 将悬浮按钮添加到文档中
+    document.body.appendChild(fullscreenBtn);
+
+    // 点击悬浮按钮将网页切换到全屏模式
+    fullscreenBtn.addEventListener('click', () => {
+      document.documentElement.requestFullscreen();
+      fullscreenBtn.style.display = 'none';
+    });
+
+    // 监听文档的全屏状态变化，显示或隐藏悬浮按钮
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement === null) {
+        fullscreenBtn.style.display = 'block';
+      } else {
+        fullscreenBtn.style.display = 'none';
+      }
+    });
+})();
